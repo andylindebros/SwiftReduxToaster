@@ -31,7 +31,7 @@ struct AppState: Codable {
         WindowGroup {
             ZStack {
                 Button(action: {
-                    store.dispatch(ToasterAction.add(.init(
+                    store.dispatch(ToasterAction.add(ToasterModel(
                         type: .success,
                         title: "Success toast", 
                         message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
