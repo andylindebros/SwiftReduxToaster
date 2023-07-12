@@ -53,8 +53,6 @@ struct ToastWrapper<Content: View>: View {
 
     var task: Task<Void, Never>?
 
-    let backgrounds = [Color.red, Color.pink, Color.yellow, Color.green, Color.purple]
-
     var body: some View {
         content(model, task)
     }
