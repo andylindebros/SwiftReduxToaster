@@ -1,5 +1,5 @@
-# SwiftTReduxToaster
-SwiftTReduxToaster provides a notification view for a Swift redux app
+# SwiftReduxToaster
+SwiftReduxToaster provides a notification view for a Swift redux app
 
 ![Demo](https://github.com/andylindebros/SwiftReduxToaster/blob/main/Assets/banner.gif)
 
