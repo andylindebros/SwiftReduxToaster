@@ -12,7 +12,38 @@ dependencies: [
     .package(url: "https://github.com/andylindebros/SwiftReduxToaster.git", .upToNextMajor(from: "0.0.0"))
 ]
 ```
-## Implementation
+
+## MVVM Implementation
+```Swift
+@MainActor struct ToasterExampleApp: App {
+    let viewModel: MVVMWrapper(state: ToasterState(activeNavigationId: UUID()))
+
+    var body: some Scene {
+        WindowGroup {
+            ZStack {
+                Button(action: {
+                    viewModel.dispatch(ToasterAction.add(ToasterModel(type: .success, title: "Awesome!")))
+                }) {
+                    Text("Trigger notification")
+                }
+                ToasterView(
+                    state: viewModel.state,
+                    dispatch: { action in
+                        guard let action = action as? ToasterAction else { return }
+                        viewModel.dispatch(action)
+                    },
+                    navigationId: viewModel.state.activeNavigationId ?? UUID()
+                ) { model, task in
+                    DefaultToast(model: model, task: task, onClose: {
+                        viewModel.dispatch(ToasterAction.dismiss(model))
+                    })
+                }
+            }
+        }
+    }
+}
+```
+## Redux Implementation
 1. Add the state of the SwiftReduxToaster to the AppState
 ```Swift
 

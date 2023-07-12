@@ -3,8 +3,9 @@ import Foundation
 // MARK: State
 
 public final class ToasterState: ObservableObject, Codable {
-    public init(models: [ToasterModel] = []) {
+    public init(models: [ToasterModel] = [], activeNavigationId: UUID? = nil) {
         self.models = models
+        self.activeNavigationId = activeNavigationId
     }
 
     public required init(from decoder: Decoder) throws {
