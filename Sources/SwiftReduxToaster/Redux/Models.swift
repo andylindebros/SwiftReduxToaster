@@ -1,7 +1,7 @@
 import Foundation
 
 public struct ToasterModel: Identifiable, Codable, Sendable {
-    public init(id: UUID = UUID(), type: ToasterType, target: Target, isDismissable: Bool = true, title: String, message: String? = nil, timeoutInterval: Int = 7, url: URL? = nil) {
+    public init(id: UUID = UUID(), type: ToasterType, target: Target = .all, isDismissable: Bool = true, title: String, message: String? = nil, timeoutInterval: Int = 7, url: URL? = nil) {
         self.id = id
         self.type = type
         self.title = title

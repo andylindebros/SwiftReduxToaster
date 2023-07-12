@@ -32,8 +32,7 @@ struct AppState: Codable {
             ZStack {
                 Button(action: {
                     store.dispatch(ToasterAction.add(.init(
-                        type: .success, 
-                        target: .all, 
+                        type: .success,
                         title: "Success toast", 
                         message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     )))
@@ -70,11 +69,20 @@ struct ToasterModel{
     let type: ToasterType // success, info, warning, error
     let title: String // The title of the notification
     let message: String? // the message of the notification
-    let target: Target // Limitation of views that should show the notification (Useful if you have multiple view implementations)
+    let target: Target // Limitation of views that should show the notification (Useful if you have multiple view implementations). Default: .all
     let timeoutInterval: Int // Dismiss after number of seconds. Default is 7. Disable it by setting it to zero
-    let isDismissable: Bool // Defines if the user can dismiss it or not
+    let isDismissable: Bool // Defines if the user can dismiss it or not. Default: true
     let url: URL? // Pass a url that can be use in future actions. Useful when working with deep links
 }
+
+store.dispatch(ToasterAction.add(ToasterModel(
+    type: .warning,
+    target: .all,
+    title: "Warning!",
+    message: "No internet connection available",
+    timeoutInterval: 0,
+    isDismissable: false
+)))
 ```
 
 ## Custom view
