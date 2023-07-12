@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lindebrothers/Logger",
+      "state" : {
+        "revision" : "44a44f07de58352bafdf20e909c4ef6cbde01d0e",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swiftreduxrouter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/andylindebros/SwiftReduxRouter",
+      "state" : {
+        "revision" : "bde9cee9b63b37c13d3e757c71bef40c56950257",
+        "version" : "16.0.1"
+      }
+    },
+    {
+      "identity" : "swiftuiredux",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/andylindebros/SwiftUIRedux",
+      "state" : {
+        "revision" : "07ade816ddd464111964f52fa9587ed1f078f36b",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}
