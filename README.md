@@ -37,7 +37,7 @@ struct AppState: Codable {
                         message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                     )))
                 }) {
-                    Text("Tigger notificaiton")
+                    Text("Trigger notificaiton")
                 }
 
                 SwiftReduxToaster.ToasterView(
@@ -50,10 +50,11 @@ struct AppState: Codable {
                 ) { model, task in
                     DefaultToast(
                         model: model,
-                        task: task
-                    ) {
-                           store.dispatch(ToasterAction.dismiss(model))
-                    }
+                        task: task,
+                        onClose: {
+                            dispatch(ToasterAction.dismiss(model))
+                        }
+                    )
                 }
             }
         }

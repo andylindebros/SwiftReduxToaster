@@ -98,10 +98,11 @@ struct Toaster<Content: View>: View {
             ) { model, task in
                 DefaultToast(
                     model: model,
-                    task: task
-                ) {
-                    dispatch(ToasterAction.dismiss(model))
-                }
+                    task: task,
+                    onClose: {
+                        dispatch(ToasterAction.dismiss(model))
+                    }
+                )
             }
         }
     }
