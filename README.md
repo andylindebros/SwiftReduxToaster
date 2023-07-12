@@ -3,7 +3,15 @@ SwiftReduxToaster provides a notification view for a Swift redux app
 
 ![Demo](https://github.com/andylindebros/SwiftReduxToaster/blob/main/Assets/banner.gif)
 
+## Installation
 
+### Swift Package
+Add the Swift package to your dependencies
+``` Swift
+dependencies: [
+    .package(url: "https://github.com/andylindebros/SwiftReduxToaster.git", .upToNextMajor(from: "0.0.0"))
+]
+```
 ## Implementation
 1. Add the state of the SwiftReduxToaster to the AppState
 ```Swift
