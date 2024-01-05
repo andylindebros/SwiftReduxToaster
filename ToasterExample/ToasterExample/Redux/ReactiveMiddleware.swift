@@ -20,6 +20,11 @@ public enum ReactiveMiddleware {
                     case NavigationAction.setNavigationDismsissed:
                         let selectedNavigationID = state.navigation.selectedModelId
                         dispatch(ToasterAction.activeNavigation(selectedNavigationID))
+                    case let NavigationAction.deeplink(deeplink):
+                        if let reaction = deeplink.action(for: state.navigation),
+                           let navigationAction = reaction as? Action {
+                            dispatch(navigationAction)
+                        }
                     default:
                         break
                     }

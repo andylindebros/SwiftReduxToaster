@@ -59,14 +59,16 @@ struct ToastWrapper<Content: View>: View {
 }
 
 public struct DefaultToast: View {
-    public init(model: ToasterModel, task: Task<Void, Never>?, onClose: @escaping () -> Void) {
+    public init(model: ToasterModel, task: Task<Void, Never>?, onURL: ((URL) -> Void)? = nil, onClose: @escaping () -> Void) {
         self.model = model
         self.onClose = onClose
         self.task = task
+        self.onURL = onURL
     }
 
     private let model: ToasterModel
     private let onClose: () -> Void
+    private let onURL: ((URL) -> Void)?
     private let task: Task<Void, Never>?
 
     public var body: some View {
@@ -94,6 +96,18 @@ public struct DefaultToast: View {
                                 .font(.system(size: 14))
                             Spacer()
                         }
+                    }
+                    if let url = model.url {
+                        Button(action: {
+                            onURL?(url)
+                        }) {
+                            Text(model.buttonLabel ?? "Open")
+                                .bold()
+                                .font(.system(size: 14))
+                                .lineLimit(1)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.top, 4)
                     }
                 }
                 .multilineTextAlignment(.leading)

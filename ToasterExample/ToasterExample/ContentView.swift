@@ -17,7 +17,7 @@ struct ContentView: View {
                     render: { _, model, _ in
                         CustomViewController(
                             rootView:
-                            Toaster(state: store.state.toaster, dispatch: store.dispatchFunction, navigationId: model.id) {
+                                Toaster(state: store.state.toaster, dispatch: store.dispatchFunction, navigationId: model.id) {
                                 VStack(spacing: 16) {
                                     Button(action: {
                                         store.dispatch(NavigationAction.add(path: NavigationPath.create("/first")!, to: .new()))
@@ -26,7 +26,13 @@ struct ContentView: View {
                                     }
 
                                     Button(action: {
-                                        store.dispatch(ToasterAction.add(.init(type: .success, target: .targeted(to: model.id), title: "Success toast for this view", message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")))
+                                        store.dispatch(ToasterAction.add(.init(
+                                            type: .success,
+                                            target: .targeted(to: model.id),
+                                            title: "Success toast for this view", message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                            url: URL(string: "/tab3/second"),
+                                            buttonLabel: "Open"
+                                        )))
                                     }) {
                                         Text("Success toast for this view")
                                     }
@@ -99,6 +105,11 @@ struct Toaster<Content: View>: View {
                 DefaultToast(
                     model: model,
                     task: task,
+                    onURL: { url in
+                        guard
+                            let deepLink = NavigationAction.Deeplink(with: url) else { return }
+                        dispatch(NavigationAction.deeplink(deepLink))
+                    },
                     onClose: {
                         dispatch(ToasterAction.dismiss(model))
                     }
