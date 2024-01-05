@@ -46,9 +46,6 @@ public extension ToasterState {
             state.models.remove(at: index)
 
         case let .activeNavigation(id):
-            // remove all redundant models
-            state.models = state.models.filter { !$0.target.isTargeted(for: state.activeNavigationId) }
-
             state.activeNavigationId = id
 
         case .none:
