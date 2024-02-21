@@ -7,11 +7,13 @@ public struct ToasterView<Content: View>: View {
         state: ToasterState,
         dispatch: @escaping ToasterDispatcher,
         navigationId: UUID,
+        showOnlyToActive: Bool = true,
         @ViewBuilder content: @escaping (ToasterModel, Task<Void, Never>?) -> Content
     ) {
         self.state = state
         self.dispatch = dispatch
         self.navigationId = navigationId
+        self.showOnlyToActive = showOnlyToActive
         self.content = content
     }
 
@@ -19,11 +21,12 @@ public struct ToasterView<Content: View>: View {
 
     private let dispatch: ToasterDispatcher
     private let navigationId: UUID
+    private let showOnlyToActive: Bool
     private let content: (ToasterModel, Task<Void, Never>?) -> Content
 
     public var body: some View {
         ZStack {
-            if let model = state.models.first(where: { $0.target.isValid(for: navigationId) }), navigationId == state.activeNavigationId {
+            if let model = state.models.first(where: { $0.target.isValid(for: navigationId) }), (navigationId == state.activeNavigationId || !showOnlyToActive) {
                 ToastWrapper(model: model, dispatch: dispatch, content: content)
             }
         }.animation(.easeOut, value: state.isActive)
